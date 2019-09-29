@@ -13,5 +13,5 @@ public abstract class Ability : ScriptableObject
     public GameObject aParticles;                   // The particle systems prefab for the ability
 
     public abstract void Initialize(GameObject obj);
-    public abstract void TriggerAbility();
+    public abstract void TriggerAbility(int abilityIndex);
 }

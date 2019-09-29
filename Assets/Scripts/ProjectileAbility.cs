@@ -11,17 +11,18 @@ public class ProjectileAbility : Ability
     private AbilityCaster caster;
 
     public override void Initialize(GameObject obj)
-    { 
+    {
+
         caster = obj.GetComponent<AbilityCaster>();
         caster.AddAbility(this);
         caster.particleForce = particleForce;
         
     }
 
-    public override void TriggerAbility()
+    public override void TriggerAbility(int abilityIndex)
     {
         
-        caster.TriggerAbility();
+        caster.TriggerAbility(abilityIndex);
     }
 
 }

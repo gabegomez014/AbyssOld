@@ -10,20 +10,21 @@ public class RaycastAbility : Ability
     public float force = 100f;
     public GameObject abilityParticles;
 
-    private RaycastShootTriggerable rcShoot;
+    //private RaycastShootTriggerable rcShoot;
+    private AbilityCaster caster;
 
     public override void Initialize(GameObject obj)
     {
-        rcShoot = obj.GetComponent<RaycastShootTriggerable>();
-        rcShoot.Initialize();
+        //rcShoot = obj.GetComponent<RaycastShootTriggerable>();
+        //rcShoot.Initialize();
 
-        rcShoot.damage = 1;
-        rcShoot.range = range;
-        rcShoot.force = force;
+        //rcShoot.damage = 1;
+        //rcShoot.range = range;
+        //rcShoot.force = force;
     }
 
-    public override void TriggerAbility()
+    public override void TriggerAbility(int abilityIndex)
     {
-        rcShoot.Fire();
+        //rcShoot.Fire(abilityIndex);
     }
 }
