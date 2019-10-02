@@ -21,7 +21,6 @@ public class ProjectileAbility : Ability
 
     public override void TriggerAbility(int abilityIndex)
     {
-        
         caster.TriggerAbility(abilityIndex);
     }
 

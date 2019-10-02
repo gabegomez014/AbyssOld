@@ -17,6 +17,8 @@ public class AbilityCooldown : MonoBehaviour
     private float cooldownDuration;
     private float nextReadyTime;
     private float cooldownTimeLeft;
+    private string currentEventName;
+    private Button button;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,7 @@ public class AbilityCooldown : MonoBehaviour
         ability = selectedAbility;
         myButtonImage = GetComponent<Image>();
         abilitySource = GetComponent<AudioSource>();
+        button = GetComponent<Button>();
         myButtonImage.sprite = ability.aSprite;
         //darkMask.sprite = ability.aSprite;
         cooldownDuration = ability.aBaseCoolDown;
@@ -43,25 +46,27 @@ public class AbilityCooldown : MonoBehaviour
         if (Time.time > nextReadyTime)
         {
             AbilityReady();
-            string currentEventName = EventSystem.current.currentSelectedGameObject.name;
-            
+            //currentEventName = EventSystem.current.currentSelectedGameObject.name;
+            print("Button name is " + button.name);
+            //switch (currentEventName)
+            //{
+            //    case "AbilityIcon1":
+            //        print("We see ability 1 being used");
+            //        ButtonTriggered(0);
+            //        currentEventName = "";
+            //        break;
 
-            switch (currentEventName)
-            {
-                case "AbilityIcon1":
-                    print("We see ability 1 being used");
-                    ButtonTriggered(0);
-                    break;
+            //    case "AbilityIcon2":
+            //        print("We see ability 2 being used");
+            //        ButtonTriggered(1);
+            //        currentEventName = "";
+            //        break;
 
-                case "AbilityIcon2":
-                    print("We see ability 2 being used");
-                    ButtonTriggered(1);
-                    break;
-
-                default:
-                    print("Not an ability");
-                    break;
-            }
+            //    default:
+            //        print("Not an ability");
+            //        currentEventName = "";
+            //        break;
+            //}
             
         }
         else

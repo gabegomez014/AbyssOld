@@ -20,9 +20,8 @@ public class AbilityCaster : MonoBehaviour
             print("In this if block");
             return;
         }
-        
-        print("Abilities Length is " + abilities.Count);
-        print("New ability is " + newAbility.name);
+
+        abilities.Insert(0, newAbility);
         abilities.Add(newAbility);
     }
 
@@ -33,6 +32,7 @@ public class AbilityCaster : MonoBehaviour
 
     IEnumerator CastAbility(int abilityIndex)
     {
+        print("We see cast ability being called");
         Culmination(abilityIndex);
         yield return new WaitForSeconds(culminationTime);
         Launch();
