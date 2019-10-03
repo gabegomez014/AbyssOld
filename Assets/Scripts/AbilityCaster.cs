@@ -17,7 +17,6 @@ public class AbilityCaster : MonoBehaviour
     {
         if (abilities.Count == abilityCount)
         {
-            print("In this if block");
             return;
         }
 
@@ -32,7 +31,6 @@ public class AbilityCaster : MonoBehaviour
 
     IEnumerator CastAbility(int abilityIndex)
     {
-        print("We see cast ability being called");
         Culmination(abilityIndex);
         yield return new WaitForSeconds(culminationTime);
         Launch();

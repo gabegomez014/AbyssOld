@@ -26,13 +26,21 @@ public class AbilityCooldown : MonoBehaviour
         Initialize(ability, abilityHolder);
     }
 
+    void Update()
+    {
+        if (Time.time > nextReadyTime)
+        {
+            AbilityReady();
+        }
+    }
+
     public void Initialize(Ability selectedAbility, GameObject abilityHolder)
     {
         ability = selectedAbility;
         myButtonImage = GetComponent<Image>();
         abilitySource = GetComponent<AudioSource>();
-        button = GetComponent<Button>();
         myButtonImage.sprite = ability.aSprite;
+        button = GetComponent<Button>();
         //darkMask.sprite = ability.aSprite;
         cooldownDuration = ability.aBaseCoolDown;
         abilitySource.clip = ability.aSound;
@@ -40,46 +48,23 @@ public class AbilityCooldown : MonoBehaviour
         AbilityReady();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AbilityClickHandle(int index)
     {
-        if (Time.time > nextReadyTime)
-        {
-            AbilityReady();
-            //currentEventName = EventSystem.current.currentSelectedGameObject.name;
-            print("Button name is " + button.name);
-            //switch (currentEventName)
-            //{
-            //    case "AbilityIcon1":
-            //        print("We see ability 1 being used");
-            //        ButtonTriggered(0);
-            //        currentEventName = "";
-            //        break;
-
-            //    case "AbilityIcon2":
-            //        print("We see ability 2 being used");
-            //        ButtonTriggered(1);
-            //        currentEventName = "";
-            //        break;
-
-            //    default:
-            //        print("Not an ability");
-            //        currentEventName = "";
-            //        break;
-            //}
-            
+        if (Time.time > nextReadyTime) {
+            AbilityTriggered(index);
         }
+
         else
         {
             Cooldown();
         }
-
     }
 
     private void AbilityReady()
     {
         //cooldownTextDisplay.enabled = false;
         //darkMask.enabled = false;
+        button.enabled = true;
     }
 
     private void Cooldown()
@@ -90,12 +75,14 @@ public class AbilityCooldown : MonoBehaviour
         //darkMask.fillAmount = (cooldownTimeLeft / cooldownDuration);
     }
 
-    private void ButtonTriggered(int abilityIndex)
+    private void AbilityTriggered(int abilityIndex)
     {
         nextReadyTime = cooldownDuration + Time.time;
         cooldownTimeLeft = cooldownDuration;
         //darkMask.enabled = true;
         //cooldownTextDisplay.enabled = true;
+        button.enabled = false;
+
 
         abilitySource.Play();
         ability.TriggerAbility(abilityIndex);
