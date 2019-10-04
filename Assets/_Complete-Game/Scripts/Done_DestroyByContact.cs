@@ -23,6 +23,7 @@ public class Done_DestroyByContact : MonoBehaviour
 
 	void OnTriggerEnter (Collider other)
 	{
+        print("We are detecting " + other.name);
 		if (other.tag == "Boundary" || other.tag == "Enemy")
 		{
 			return;
@@ -30,11 +31,13 @@ public class Done_DestroyByContact : MonoBehaviour
 
 		if (explosion != null)
 		{
+            print(this.name + " Should be exploding");
 			Instantiate(explosion, transform.position, transform.rotation);
 		}
 
 		if (other.tag == "Player")
 		{
+            print("We see the player explode");
 			Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
 			gameController.GameOver();
 		}
