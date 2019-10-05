@@ -83,7 +83,6 @@ public class AbilityCooldown : MonoBehaviour
         //cooldownTextDisplay.enabled = true;
         button.enabled = false;
 
-
         abilitySource.Play();
         ability.TriggerAbility(abilityIndex);
     }

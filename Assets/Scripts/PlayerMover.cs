@@ -4,16 +4,46 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
 {
+    private float nextReadyTime;
+    private float cooldownTimeLeft;
+    private float cooldownDuration = 2;
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.touchCount > 0)
-		{
-			Touch touch = Input.GetTouch(0);
-			//touch.phase                       // This allows us to see the status of the touch (i.e Begun, Canceled, etc.)
-			Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
-			touchPosition.y = 0;
-			transform.position = touchPosition;
-		}
+
+        MoveReady();
+
+    }
+
+    public void MoveReady()
+    {
+        if (Time.time > nextReadyTime)
+        {
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+                TouchRegistered(touch);
+            }
+        }
+
+        else
+        {
+            Cooldown();
+        }
+    }
+
+    private void TouchRegistered(Touch touch)
+    {
+        Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+        touchPosition.y = 0;
+        transform.position = touchPosition;
+
+
+    }
+
+    private void Cooldown()
+    {
+        cooldownTimeLeft -= Time.deltaTime;
     }
 }
