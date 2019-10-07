@@ -7,12 +7,9 @@ ScriptsOnlyBuild:
     - Done_DestroyByBoundary
     - Done_DestroyByContact
     - Done_DestroyByTime
-    - Done_EvasiveManeuver
     - Done_GameController
     - Done_Mover
-    - Done_PlayerController
     - Done_RandomRotator
-    - Done_WeaponController
     - PlayerMover
     - ProjectileAbility
     Unity.2D.Tilemap.Editor.dll:
@@ -21,6 +18,12 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
+    Unity.RenderPipelines.Lightweight.Runtime.dll:
+    - UnityEngine.Rendering.LWRP.ForwardRendererData
+    - UnityEngine.Rendering.LWRP.LightweightRenderPipelineAsset
+    - UnityEngine.Rendering.LWRP.LightweightRenderPipelineEditorResources
+    Unity.ShaderGraph.Editor.dll:
+    - UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -71,45 +74,41 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9844}
+      Script: {instanceID: 9854}
     - Class: 114
-      Script: {instanceID: 10112}
+      Script: {instanceID: 10122}
     - Class: 114
-      Script: {instanceID: 10158}
+      Script: {instanceID: 10168}
     - Class: 114
-      Script: {instanceID: 10236}
+      Script: {instanceID: 10246}
     - Class: 114
-      Script: {instanceID: 10500}
+      Script: {instanceID: 10510}
     - Class: 114
-      Script: {instanceID: 10972}
+      Script: {instanceID: 10982}
     - Class: 114
-      Script: {instanceID: 11182}
+      Script: {instanceID: 11196}
     - Class: 114
-      Script: {instanceID: 11186}
+      Script: {instanceID: 11290}
     - Class: 114
-      Script: {instanceID: 11280}
+      Script: {instanceID: 11730}
     - Class: 114
-      Script: {instanceID: 11720}
+      Script: {instanceID: 11888}
     - Class: 114
-      Script: {instanceID: 11878}
+      Script: {instanceID: 12226}
     - Class: 114
-      Script: {instanceID: 12198}
+      Script: {instanceID: 12286}
     - Class: 114
-      Script: {instanceID: 12216}
+      Script: {instanceID: 12542}
     - Class: 114
-      Script: {instanceID: 12276}
+      Script: {instanceID: 12766}
     - Class: 114
-      Script: {instanceID: 12532}
+      Script: {instanceID: 12944}
     - Class: 114
-      Script: {instanceID: 12756}
+      Script: {instanceID: 13070}
     - Class: 114
-      Script: {instanceID: 12934}
+      Script: {instanceID: 13222}
     - Class: 114
-      Script: {instanceID: 13060}
-    - Class: 114
-      Script: {instanceID: 13212}
-    - Class: 114
-      Script: {instanceID: 13334}
+      Script: {instanceID: 13344}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124

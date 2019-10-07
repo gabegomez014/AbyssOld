@@ -38,7 +38,7 @@ public class PlayerMover : MonoBehaviour
         Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
         touchPosition.y = 0;
         transform.position = touchPosition;
-
+        nextReadyTime = cooldownDuration + Time.time;
 
     }
 
