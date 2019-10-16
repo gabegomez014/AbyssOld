@@ -7,6 +7,7 @@ public class ProjectileAbility : Ability
 {
 
     public float particleForce = 500f;
+    public float culminationTime = 1f;              // How long it takes the power to charge up
 
     private AbilityCaster caster;
 
