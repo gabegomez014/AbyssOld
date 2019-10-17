@@ -6,50 +6,59 @@ public class AbilityCaster : MonoBehaviour
 { 
     public Transform spawn;                            // Transform variable to hold the location where we will spawn our projectile
     public static int abilityCount = 9;                // Amount of abilities player can use at once
-    [HideInInspector] public float particleForce = 250f;                    // Float variable to hold the amount of force which we will apply to launch our projectiles
-    [HideInInspector] public float culminationTime = 1f;                    // How long the ability takes to charge up
-    [HideInInspector] public float lifeTime = 1f;                           // How long the ability lives without hitting anything
-    [HideInInspector] public List<Ability> abilities = new List<Ability> { }; // All the Ability Scripts a player can use
 
     private GameObject clonedParticle;
+    private Ability selectedAbility;
 
-    public void AddAbility(Ability newAbility)
+    public void TriggerAbility(Ability triggeredAbility)
     {
-        if (abilities.Count == abilityCount)
+        selectedAbility = triggeredAbility;
+        StartCoroutine(CastAbility());
+    }
+
+    IEnumerator CastAbility()
+    {
+        print("Selected abiliity type is " + selectedAbility.GetType());
+
+        var abilityType = selectedAbility.GetType().ToString();
+
+        switch(abilityType)
         {
-            return;
+            case "ProjectileAbility":
+                Culmination();
+                yield return new WaitForSeconds(selectedAbility.aCulminationTime);
+                Launch();
+                yield return new WaitForSeconds(selectedAbility.aLifetime);
+                Release();
+                break;
+
+            case "DefenseAbility":
+                print("We see the defense ability");
+                break;
+
+            case "EnhancerAbility":
+                print("We see the ability");
+                break;
+
+            case "RaycastAbility":
+                print("We see the ability");
+                break;
         }
-
-        abilities.Insert(0, newAbility);
-        abilities.Add(newAbility);
-    }
-
-    public void TriggerAbility(int abilityIndex)
-    {
-        StartCoroutine(CastAbility(abilityIndex));
-    }
-
-    IEnumerator CastAbility(int abilityIndex)
-    {
-        Culmination(abilityIndex);
-        yield return new WaitForSeconds(culminationTime);
-        Launch();
-        yield return new WaitForSeconds(lifeTime);
-        Release();
+        
     }
 
     // This represents the ability being charged up
-    private void Culmination(int abilityIndex)
+    private void Culmination()
     {
         //Instantiate a copy of our projectile and store it in a new GameObject variable called clonedParticle
-        clonedParticle = Instantiate(abilities[abilityIndex].aParticles, spawn.position, transform.rotation) as GameObject;
+        clonedParticle = Instantiate(selectedAbility.aParticles, spawn.position, transform.rotation) as GameObject;
     }
 
-    // This represents the ability being launched.
+    // This represents the ability being launched. This is mainly used for the projectile class of abilities
     private void Launch()
     {
         //Add force to the instantiated bullet, pushing it forward away from the spawn location, using projectile force for how hard to push it away
-        clonedParticle.GetComponent<Rigidbody>().AddForce(spawn.transform.forward * particleForce);
+        clonedParticle.GetComponent<Rigidbody>().AddForce(spawn.transform.forward * selectedAbility.aProjectileForce);
     }
 
     // This represents the death of the ability

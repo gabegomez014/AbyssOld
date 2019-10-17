@@ -9,14 +9,12 @@ public class DefenseAbility : Ability
 
     public override void Initialize(GameObject obj)
     {
-
         caster = obj.GetComponent<AbilityCaster>();
-        caster.AddAbility(this);
 
     }
 
     public override void TriggerAbility(int abilityIndex)
     {
-        caster.TriggerAbility(abilityIndex);
+        caster.TriggerAbility(this);
     }
 }

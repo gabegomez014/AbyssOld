@@ -8,6 +8,7 @@ public class EnhancerAbility : Ability
     public string stat;
     [Range(0, 100)]
     public float effect;
+    public Material enhancerMaterial;
 
     private AbilityCaster caster;
 
@@ -15,12 +16,14 @@ public class EnhancerAbility : Ability
     {
 
         caster = obj.GetComponent<AbilityCaster>();
-        caster.AddAbility(this);
+        this.aStat = stat;
+        this.aEffect = effect;
+        this.aEnhanceMaterial = enhancerMaterial;
 
     }
 
     public override void TriggerAbility(int abilityIndex)
     {
-        caster.TriggerAbility(abilityIndex);
+        caster.TriggerAbility(this);
     }
 }

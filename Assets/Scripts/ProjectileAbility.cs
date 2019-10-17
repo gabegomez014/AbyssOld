@@ -6,7 +6,7 @@ using UnityEngine;
 public class ProjectileAbility : Ability
 {
 
-    public float particleForce = 500f;
+    public float projectileForce = 500f;               // The force that projectile is sent flying at
     public float culminationTime = 1f;              // How long it takes the power to charge up
 
     private AbilityCaster caster;
@@ -15,14 +15,14 @@ public class ProjectileAbility : Ability
     {
 
         caster = obj.GetComponent<AbilityCaster>();
-        caster.AddAbility(this);
-        caster.particleForce = particleForce;
+        this.aCulminationTime = culminationTime;
+        this.aProjectileForce = projectileForce;
         
     }
 
     public override void TriggerAbility(int abilityIndex)
     {
-        caster.TriggerAbility(abilityIndex);
+        caster.TriggerAbility(this);
     }
 
 }
