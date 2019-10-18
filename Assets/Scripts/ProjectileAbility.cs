@@ -13,14 +13,12 @@ public class ProjectileAbility : Ability
 
     public override void Initialize(GameObject obj)
     {
-
         caster = obj.GetComponent<AbilityCaster>();
         this.aCulminationTime = culminationTime;
         this.aProjectileForce = projectileForce;
-        
     }
 
-    public override void TriggerAbility(int abilityIndex)
+    public override void TriggerAbility()
     {
         caster.TriggerAbility(this);
     }

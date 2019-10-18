@@ -48,10 +48,11 @@ public class AbilityCooldown : MonoBehaviour
         AbilityReady();
     }
 
-    public void AbilityClickHandle(int index)
+    public void AbilityClickHandle()
     {
+
         if (Time.time > nextReadyTime) {
-            AbilityTriggered(index);
+            AbilityTriggered();
         }
 
         else
@@ -75,7 +76,7 @@ public class AbilityCooldown : MonoBehaviour
         //darkMask.fillAmount = (cooldownTimeLeft / cooldownDuration);
     }
 
-    private void AbilityTriggered(int abilityIndex)
+    private void AbilityTriggered()
     {
         nextReadyTime = cooldownDuration + Time.time;
         cooldownTimeLeft = cooldownDuration;
@@ -84,6 +85,6 @@ public class AbilityCooldown : MonoBehaviour
         button.enabled = false;
 
         abilitySource.Play();
-        ability.TriggerAbility(abilityIndex);
+        ability.TriggerAbility();
     }
 }

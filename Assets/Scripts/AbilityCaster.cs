@@ -18,8 +18,6 @@ public class AbilityCaster : MonoBehaviour
 
     IEnumerator CastAbility()
     {
-        print("Selected abiliity type is " + selectedAbility.GetType());
-
         var abilityType = selectedAbility.GetType().ToString();
 
         switch(abilityType)
@@ -33,11 +31,13 @@ public class AbilityCaster : MonoBehaviour
                 break;
 
             case "DefenseAbility":
-                print("We see the defense ability");
+                Defend();
+                yield return new WaitForSeconds(selectedAbility.aLifetime);
+                Release();
                 break;
 
             case "EnhancerAbility":
-                print("We see the ability");
+                Enhance();
                 break;
 
             case "RaycastAbility":
@@ -61,9 +61,22 @@ public class AbilityCaster : MonoBehaviour
         clonedParticle.GetComponent<Rigidbody>().AddForce(spawn.transform.forward * selectedAbility.aProjectileForce);
     }
 
+    // This method represents the casting of a defense ability
+    private void Defend()
+    {
+        clonedParticle = Instantiate(selectedAbility.aParticles, spawn.position, transform.rotation) as GameObject;
+    }
+
+    // This method represents the casting of an enchaner abiltiy
+    private void Enhance()
+    {
+        selectedAbility.aCharacterSkin.materials[0] = selectedAbility.aEnhanceMaterial;
+    }
+
     // This represents the death of the ability
     private void Release()
     {
+        
         Destroy(clonedParticle);
     }
 }

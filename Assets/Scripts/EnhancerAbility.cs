@@ -10,19 +10,23 @@ public class EnhancerAbility : Ability
     public float effect;
     public Material enhancerMaterial;
 
+    [HideInInspector] public MeshRenderer characterSkin;
     private AbilityCaster caster;
 
     public override void Initialize(GameObject obj)
     {
 
         caster = obj.GetComponent<AbilityCaster>();
+        characterSkin = obj.GetComponent<MeshRenderer>();
+
+        this.aCharacterSkin = characterSkin;
         this.aStat = stat;
         this.aEffect = effect;
         this.aEnhanceMaterial = enhancerMaterial;
 
     }
 
-    public override void TriggerAbility(int abilityIndex)
+    public override void TriggerAbility()
     {
         caster.TriggerAbility(this);
     }

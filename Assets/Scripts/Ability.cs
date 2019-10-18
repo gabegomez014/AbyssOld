@@ -32,13 +32,16 @@ public abstract class Ability : ScriptableObject
     [HideInInspector] public string aStat;
     [HideInInspector] public float aEffect;
     [HideInInspector] public Material aEnhanceMaterial;
+    [HideInInspector] public MeshRenderer aCharacterSkin;
 
     /* Enhancer Ability */
 
     /* Defense Ability */
 
+    [HideInInspector] public float aRadius;
+
     /* Defense Ability */
 
     public abstract void Initialize(GameObject obj);
-    public abstract void TriggerAbility(int abilityIndex);
+    public abstract void TriggerAbility();
 }

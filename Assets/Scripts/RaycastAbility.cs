@@ -19,7 +19,7 @@ public class RaycastAbility : Ability
         this.aRCForce = force;
     }
 
-    public override void TriggerAbility(int abilityIndex)
+    public override void TriggerAbility()
     {
         caster.TriggerAbility(this);
     }
