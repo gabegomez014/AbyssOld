@@ -5,12 +5,16 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public int maxHealth = 100;
+    public int maxArete = 100;
 
     public int currentHealth { get; private set; }
+    public int currentArete { get; private set; }
 
-    public CharacterStat attackPower;
-    public CharacterStat attackSpeed;
-    public CharacterStat movement;
+    [HideInInspector] public CharacterStat attackPower;
+    [HideInInspector] public CharacterStat attackSpeed;
+    [HideInInspector] public CharacterStat speed;
+    [HideInInspector] public CharacterStat defense;
+    [HideInInspector] public CharacterStat arete; // Basically Magic Points
 
     private void Awake()
     {
