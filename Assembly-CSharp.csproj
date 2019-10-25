@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\CharacterStats\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\CharacterStats\StatModifier.cs" />
     <Compile Include="Assets\Scripts\DefenseAbility.cs" />
+    <Compile Include="Assets\Scripts\EnemyStats.cs" />
     <Compile Include="Assets\Scripts\EnhancerAbility.cs" />
     <Compile Include="Assets\Scripts\PlayerMover.cs" />
     <Compile Include="Assets\Scripts\ProjectileAbility.cs" />

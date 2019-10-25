@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
 {
-    private float nextReadyTime;
-    private float cooldownTimeLeft;
-    private float cooldownDuration = 2;
+    [SerializeField]
+    private float timeSlowDown = 0.1f;      // The point where time gets slowed down to
+    private bool teleporting = false;       // True when player hits the teleport button, false otherwise
 
     // Update is called once per frame
     void Update()
@@ -18,32 +18,36 @@ public class PlayerMover : MonoBehaviour
 
     public void MoveReady()
     {
-        if (Time.time > nextReadyTime)
+        if (Input.touchCount > 0)
         {
-            if (Input.touchCount > 0)
+            print("Teleporting is " + teleporting);
+            Touch touch = Input.GetTouch(0);
+
+            if (teleporting)
             {
-                Touch touch = Input.GetTouch(0);
+                print("In teleporting");
+                TouchRegistered(touch);
+                Time.timeScale = 1;
+            }
+
+            else
+            {
                 TouchRegistered(touch);
             }
         }
+    }
 
-        else
-        {
-            Cooldown();
-        }
+    public void Teleport()
+    {
+        teleporting = true;
+        Time.timeScale = timeSlowDown;
     }
 
     private void TouchRegistered(Touch touch)
     {
         Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
         touchPosition.y = 0;
+        touchPosition.z = transform.position.z;
         transform.position = touchPosition;
-        nextReadyTime = cooldownDuration + Time.time;
-
-    }
-
-    private void Cooldown()
-    {
-        cooldownTimeLeft -= Time.deltaTime;
     }
 }
