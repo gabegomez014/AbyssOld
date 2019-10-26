@@ -12,8 +12,13 @@ public class PlayerMover : MonoBehaviour
     void Update()
     {
 
-        MoveReady();
+        //MoveReady();
 
+    }
+
+    private void FixedUpdate()
+    {
+        MoveReady();
     }
 
     public void MoveReady()
@@ -27,7 +32,6 @@ public class PlayerMover : MonoBehaviour
             {
                 print("In teleporting");
                 TouchRegistered(touch);
-                Time.timeScale = 1;
             }
 
             else
@@ -39,15 +43,28 @@ public class PlayerMover : MonoBehaviour
 
     public void Teleport()
     {
-        teleporting = true;
+        print("Teleporting in the function is " + teleporting);
         Time.timeScale = timeSlowDown;
+        Time.fixedDeltaTime = timeSlowDown;
+        teleporting = true;
     }
 
     private void TouchRegistered(Touch touch)
     {
-        Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
-        touchPosition.y = 0;
-        touchPosition.z = transform.position.z;
-        transform.position = touchPosition;
+        if (touch.phase == TouchPhase.Began && teleporting == true)
+        {
+            print("In teleport code");
+            Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+            touchPosition.y = 0;
+            touchPosition.z = transform.position.z;
+            transform.position = touchPosition;
+            Time.timeScale = 1;
+            Time.fixedDeltaTime = 1;
+        }
+
+        else if (touch.phase == TouchPhase.Moved && !teleporting)
+        {
+            print("We are now detecting swipes");
+        }
     }
 }
