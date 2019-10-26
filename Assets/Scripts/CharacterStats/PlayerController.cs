@@ -7,7 +7,7 @@ public class Done_Boundary
 	public float xMin, xMax, zMin, zMax;
 }
 
-public class Done_PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
 	public float speed;
 	public float tilt;
@@ -21,12 +21,7 @@ public class Done_PlayerController : MonoBehaviour
 	
 	void Update ()
 	{
-		if (Input.GetButton("Fire1") && Time.time > nextFire) 
-		{
-			nextFire = Time.time + fireRate;
-			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
-			GetComponent<AudioSource>().Play ();
-		}
+		
 	}
 
 	void FixedUpdate ()

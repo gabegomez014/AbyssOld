@@ -70,13 +70,13 @@
     <Compile Include="Assets\_Complete-Game\Scripts\Done_EvasiveManeuver.cs" />
     <Compile Include="Assets\_Complete-Game\Scripts\Done_GameController.cs" />
     <Compile Include="Assets\_Complete-Game\Scripts\Done_Mover.cs" />
-    <Compile Include="Assets\_Complete-Game\Scripts\Done_PlayerController.cs" />
     <Compile Include="Assets\_Complete-Game\Scripts\Done_RandomRotator.cs" />
     <Compile Include="Assets\_Complete-Game\Scripts\Done_WeaponController.cs" />
     <Compile Include="Assets\Scripts\Ability.cs" />
     <Compile Include="Assets\Scripts\AbilityCaster.cs" />
     <Compile Include="Assets\Scripts\AbilityCooldown.cs" />
     <Compile Include="Assets\Scripts\CharacterStats\CharacterStat.cs" />
+    <Compile Include="Assets\Scripts\CharacterStats\PlayerController.cs" />
     <Compile Include="Assets\Scripts\CharacterStats\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\CharacterStats\StatModifier.cs" />
     <Compile Include="Assets\Scripts\DefenseAbility.cs" />
