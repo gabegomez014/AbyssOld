@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMover : MonoBehaviour
 {
@@ -12,25 +13,19 @@ public class PlayerMover : MonoBehaviour
     void Update()
     {
 
-        //MoveReady();
-
-    }
-
-    private void FixedUpdate()
-    {
         MoveReady();
+
     }
+
 
     public void MoveReady()
     {
         if (Input.touchCount > 0)
         {
-            print("Teleporting is " + teleporting);
             Touch touch = Input.GetTouch(0);
 
             if (teleporting)
             {
-                print("In teleporting");
                 TouchRegistered(touch);
             }
 
@@ -41,30 +36,35 @@ public class PlayerMover : MonoBehaviour
         }
     }
 
-    public void Teleport()
-    {
-        print("Teleporting in the function is " + teleporting);
-        Time.timeScale = timeSlowDown;
-        Time.fixedDeltaTime = timeSlowDown;
-        teleporting = true;
-    }
-
     private void TouchRegistered(Touch touch)
     {
+        var currentGameObject = EventSystem.current.currentSelectedGameObject;
+        if (currentGameObject != null && currentGameObject.name == "TeleportAbility")
+        {
+            teleporting = true;
+            Time.timeScale = timeSlowDown;
+            Time.fixedDeltaTime = timeSlowDown;
+            return;
+        }
+
+
         if (touch.phase == TouchPhase.Began && teleporting == true)
         {
-            print("In teleport code");
             Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
             touchPosition.y = 0;
             touchPosition.z = transform.position.z;
             transform.position = touchPosition;
             Time.timeScale = 1;
             Time.fixedDeltaTime = 1;
+            teleporting = false;
         }
 
         else if (touch.phase == TouchPhase.Moved && !teleporting)
         {
-            print("We are now detecting swipes");
+            Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+            touchPosition.y = 0;
+            touchPosition.z = transform.position.z;
+            transform.position = touchPosition;
         }
     }
 }
