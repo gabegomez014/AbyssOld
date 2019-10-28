@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class PlayerMover : MonoBehaviour
 {
-    private const float EPSILON = 0.2f;
+    private const float EPSILON = 0.1f;
 
     [SerializeField]
     private float timeSlowDown = 0.1f;      // The point where time gets slowed down to
@@ -44,7 +44,6 @@ public class PlayerMover : MonoBehaviour
         {
             teleporting = true;
             Time.timeScale = timeSlowDown;
-            Time.fixedDeltaTime = timeSlowDown;
             return;
         }
 
@@ -56,7 +55,6 @@ public class PlayerMover : MonoBehaviour
             touchPosition.z = transform.position.z;
             transform.position = touchPosition;
             Time.timeScale = 1;
-            Time.fixedDeltaTime = 1;
             teleporting = false;
         }
 
@@ -68,15 +66,20 @@ public class PlayerMover : MonoBehaviour
 
             if (System.Math.Abs(transform.position.x - touchPosition.x) > EPSILON)
             {
-                print(System.Math.Abs(transform.position.x - touchPosition.x));
                 var direction = transform.position.x - touchPosition.x;         // If positive, move to the lef. If negative, move to the right
+                print(direction);
 
-                if (direction > 0)
+                if (direction < 0.5 && direction > -0.5)
+                {
+                    rb.velocity = new Vector3(0, 0, 0);             // Checking for the in-between in order to force stop movement
+                }
+
+                if (direction > 1)
                 {
                     rb.velocity = new Vector3(-speed,0,0);          // Move Left
                 }
 
-                else if (direction < 0)
+                else if (direction < -1)
                 {
                     rb.velocity = new Vector3(speed, 0, 0);         // Move Right
                 }
