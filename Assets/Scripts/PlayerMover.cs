@@ -8,15 +8,28 @@ public class PlayerMover : MonoBehaviour
     private const float EPSILON = 0.1f;
 
     [SerializeField]
+    private GameObject teleportActivatedGO; // GameObject for teleport activation particle effects
+    private ParticleSystem teleportPS;      // Particle systems for teleport activation
+    private GameObject clone;
+
+    [SerializeField]
     private float timeSlowDown = 0.1f;      // The point where time gets slowed down to
     private bool teleporting = false;       // True when player hits the teleport button, false otherwise
+
+    [SerializeField]
+    private float cooldownDuration;
+    private float nextReadyTime;
+    private float cooldownTimeLeft;
+
     Rigidbody rb;
+    SkinnedMeshRenderer playerTexture;
 
     [HideInInspector] public float speed = 5f;         // This is how fast a character moves. This will be replaced by character stat once the stats system gets implemented
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();    
+        rb = GetComponent<Rigidbody>();
+        teleportPS = teleportActivatedGO.GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -30,6 +43,11 @@ public class PlayerMover : MonoBehaviour
 
     public void MoveReady()
     {
+        if (cooldownTimeLeft > 0)
+        {
+            cooldownTimeLeft -= Time.deltaTime;
+        }
+
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -42,20 +60,28 @@ public class PlayerMover : MonoBehaviour
         var currentGameObject = EventSystem.current.currentSelectedGameObject;
         if (currentGameObject != null && currentGameObject.name == "TeleportAbility")
         {
-            teleporting = true;
-            Time.timeScale = timeSlowDown;
-            return;
+            if (clone == null && cooldownTimeLeft <= 0)
+            {
+                clone = Instantiate(teleportActivatedGO);
+                teleporting = true;
+                Time.timeScale = timeSlowDown;
+                var main = clone.gameObject.GetComponent<ParticleSystem>().main;
+                main.simulationSpeed = 1 / timeSlowDown;
+                return;
+            }
         }
 
 
         if (touch.phase == TouchPhase.Began && teleporting == true)
         {
+            Destroy(clone);
             Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
             touchPosition.y = 0;
             touchPosition.z = transform.position.z;
             transform.position = touchPosition;
             Time.timeScale = 1;
             teleporting = false;
+            cooldownTimeLeft = cooldownDuration;
         }
 
         else if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved && !teleporting)
@@ -67,7 +93,6 @@ public class PlayerMover : MonoBehaviour
             if (System.Math.Abs(transform.position.x - touchPosition.x) > EPSILON)
             {
                 var direction = transform.position.x - touchPosition.x;         // If positive, move to the lef. If negative, move to the right
-                print(direction);
 
                 if (direction < 0.5 && direction > -0.5)
                 {
