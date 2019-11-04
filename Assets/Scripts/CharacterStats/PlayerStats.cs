@@ -21,11 +21,6 @@ public class PlayerStats : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void TakeDamange(int damage)
     {

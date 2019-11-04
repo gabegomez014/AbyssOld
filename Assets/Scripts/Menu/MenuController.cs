@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +12,8 @@ public class MenuController : MonoBehaviour
     GameObject optionScreen;
     GameObject abilityScreen;
     GameObject extrasScreen;
+
+    private PlayerInfo playerInfo;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +29,25 @@ public class MenuController : MonoBehaviour
 
         extrasScreen = this.gameObject.transform.GetChild(4).gameObject;
 
+        //DeleteInfo();
+
+        if (!File.Exists(Application.persistentDataPath + "/PlayerInfo.abyss"))
+        {
+            playerInfo = new PlayerInfo();
+            SaveInfo();
+            ToUpgradeScreen(startScreen);
+        }
+
+        //else if (File.Exists(Application.persistentDataPath + "/PlayerInfo.abyss"))
+        //{
+        //    LoadInfo();
+        //}
+
+    }
+
+    public PlayerInfo GetPlayerInfo()
+    {
+        return playerInfo;
     }
 
     public void ToGame()
@@ -45,7 +68,6 @@ public class MenuController : MonoBehaviour
         while (!asyncLoad.isDone)
         {
             yield return null;
-            print("Current Progress: " + asyncLoad.progress);
         }
     }
 
@@ -77,5 +99,25 @@ public class MenuController : MonoBehaviour
     {
         extrasScreen.SetActive(true);
         currentScreen.SetActive(false);
+    }
+
+    private void LoadInfo()
+    {
+        // This function loads  up the Player Info file
+    }
+
+    private void SaveInfo()
+    {
+        // This function saves the player info file
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/PlayerInfo.abyss");
+        bf.Serialize(file, playerInfo);
+        file.Close();
+    }
+
+    private void DeleteInfo()
+    {
+        // This has been used mostly for testing purposes thus far
+        File.Delete(Application.persistentDataPath + "/PlayerInfo.abyss");
     }
 }
