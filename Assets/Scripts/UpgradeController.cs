@@ -27,6 +27,82 @@ public class UpgradeController : MonoBehaviour
     GameObject atkSpdPBtn;
     GameObject atkSpdDBtn;
 
+    public void DecreaseStat(string stat)
+    {
+        switch (stat)
+        {
+            case "Power":
+                playerInfo.khono += 1;
+                playerInfo.power -= 1;
+
+                khonoGO.GetComponent<Text>().text = playerInfo.khono.ToString();
+                powerGO.GetComponent<TextMeshProUGUI>().text = playerInfo.power.ToString();
+                break;
+
+            case "Defense":
+                playerInfo.khono += 1;
+                playerInfo.defense -= 1;
+
+                khonoGO.GetComponent<Text>().text = playerInfo.khono.ToString();
+                defenseGO.GetComponent<TextMeshProUGUI>().text = playerInfo.defense.ToString();
+                break;
+
+            case "Speed":
+                playerInfo.khono += 1;
+                playerInfo.speed -= 1;
+
+                khonoGO.GetComponent<Text>().text = playerInfo.khono.ToString();
+                speedGO.GetComponent<TextMeshProUGUI>().text = playerInfo.speed.ToString();
+                break;
+
+            case "AtkSpd":
+                playerInfo.khono += 1;
+                playerInfo.atkSpd -= 1;
+
+                khonoGO.GetComponent<Text>().text = playerInfo.khono.ToString();
+                atkSpdGO.GetComponent<TextMeshProUGUI>().text = playerInfo.atkSpd.ToString();
+                break;
+        }
+    }
+
+    public void IncreaseStat(string stat)
+    {
+        switch (stat)
+        {
+            case "Power":
+                playerInfo.khono -= 1;
+                playerInfo.power += 1;
+
+                khonoGO.GetComponent<Text>().text = playerInfo.khono.ToString();
+                powerGO.GetComponent<TextMeshProUGUI>().text = playerInfo.power.ToString();
+                break;
+
+            case "Defense":
+                playerInfo.khono -= 1;
+                playerInfo.defense += 1;
+
+                khonoGO.GetComponent<Text>().text = playerInfo.khono.ToString();
+                defenseGO.GetComponent<TextMeshProUGUI>().text = playerInfo.defense.ToString();
+                break;
+
+            case "Speed":
+                playerInfo.khono -= 1;
+                playerInfo.speed += 1;
+
+                khonoGO.GetComponent<Text>().text = playerInfo.khono.ToString();
+                speedGO.GetComponent<TextMeshProUGUI>().text = playerInfo.speed.ToString();
+                break;
+
+            case "AtkSpd":
+                playerInfo.khono -= 1;
+                playerInfo.atkSpd += 1;
+
+                khonoGO.GetComponent<Text>().text = playerInfo.khono.ToString();
+                atkSpdGO.GetComponent<TextMeshProUGUI>().text = playerInfo.atkSpd.ToString();
+                break;
+        }
+    }
+
     private void Start()
     {
         LoadInfo();
