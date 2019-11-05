@@ -84,13 +84,13 @@
     <Compile Include="Assets\Scripts\EnemyStats.cs" />
     <Compile Include="Assets\Scripts\EnhancerAbility.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuController.cs" />
+    <Compile Include="Assets\Scripts\Menu\StartController.cs" />
+    <Compile Include="Assets\Scripts\Menu\UpgradeController.cs" />
     <Compile Include="Assets\Scripts\PlayerAnimator.cs" />
     <Compile Include="Assets\Scripts\PlayerMover.cs" />
     <Compile Include="Assets\Scripts\ProjectileAbility.cs" />
     <Compile Include="Assets\Scripts\RaycastAbility.cs" />
     <Compile Include="Assets\Scripts\RaycastShootTriggerable.cs" />
-    <Compile Include="Assets\Scripts\StartController.cs" />
-    <Compile Include="Assets\Scripts\UpgradeController.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
