@@ -69,9 +69,8 @@ public class UpgradeController : MonoBehaviour
                 break;
         }
 
-        if (!infoCopy.Equals(playerInfo))
+        if (!infoCopy.Compare(playerInfo))
         {
-            print("Tester");
             resetBtn.SetActive(true);
             saveBtn.SetActive(true);
         }
@@ -127,9 +126,8 @@ public class UpgradeController : MonoBehaviour
                 break;
         }
 
-        if(!infoCopy.Equals(playerInfo))
+        if(!infoCopy.Compare(playerInfo))
         {
-            print("Tester");
             resetBtn.SetActive(true);
             saveBtn.SetActive(true);
         }
@@ -137,8 +135,30 @@ public class UpgradeController : MonoBehaviour
 
     public void ResetStats()
     {
-        infoCopy = playerInfo;
+        infoCopy.khono = playerInfo.khono;
+        infoCopy.power = playerInfo.power;
+        infoCopy.speed = playerInfo.speed;
+        infoCopy.defense = playerInfo.defense;
+        infoCopy.atkSpd = playerInfo.atkSpd;
         SetInfo();
+    }
+
+    public void SaveChangedStats()
+    {
+        if (infoCopy.newPlayer == true)
+        {
+            infoCopy.newPlayer = false;
+        }
+
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/PlayerInfo.abyss");
+        bf.Serialize(file, infoCopy);
+        file.Close();
+
+        playerInfo = infoCopy.Clone();
+
+        resetBtn.SetActive(false);
+        saveBtn.SetActive(false);
     }
 
     private void Start()
@@ -172,7 +192,7 @@ public class UpgradeController : MonoBehaviour
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/PlayerInfo.abyss", FileMode.Open);
             playerInfo = (PlayerInfo)bf.Deserialize(file);
-            infoCopy = playerInfo;
+            infoCopy = playerInfo.Clone();
             file.Close();
 
             SetInfo();
