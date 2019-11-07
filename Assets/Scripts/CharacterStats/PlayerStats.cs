@@ -1,41 +1,58 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    public int maxHealth = 100;
-    public int maxArete = 100;
-
-    public int currentHealth { get; private set; }
-    public int currentArete { get; private set; }
 
     [HideInInspector] public CharacterStat attackPower;
     [HideInInspector] public CharacterStat attackSpeed;
     [HideInInspector] public CharacterStat speed;
     [HideInInspector] public CharacterStat defense;
-    [HideInInspector] public CharacterStat arete; // Basically Magic Points
+    [HideInInspector] public CharacterStat currentHealth { get; private set; }
+    [HideInInspector] public CharacterStat currentArete { get; private set; }
+
+    private PlayerInfo playerInfo;
 
     private void Awake()
     {
-        currentHealth = maxHealth;
+        LoadInfo();
     }
 
 
     public void TakeDamange(int damage)
     {
-        print("Health before damage: " + currentHealth + " and the damage is " + damage);
-        currentHealth -= damage;
-        print("Current Health is: " + currentHealth);
+        
+    }
 
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
+    public float GetSpeed()
+    {
+        return speed.Value;
     }
 
     private void Die()
     {
         print("Player Died");
+    }
+
+    private void LoadInfo()
+    {
+        if (File.Exists(Application.persistentDataPath + "/PlayerInfo.abyss"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/PlayerInfo.abyss", FileMode.Open);
+            playerInfo = (PlayerInfo)bf.Deserialize(file);
+            file.Close();
+
+            attackPower = new CharacterStat(playerInfo.power);
+            attackSpeed = new CharacterStat(playerInfo.atkSpd);
+            defense = new CharacterStat(playerInfo.defense);
+            speed = new CharacterStat(playerInfo.speed);
+            currentHealth = new CharacterStat(playerInfo.health);
+            currentArete = new CharacterStat(playerInfo.arete);
+
+        }
     }
 }

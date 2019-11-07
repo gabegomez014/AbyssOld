@@ -34,25 +34,28 @@ public class MenuController : MonoBehaviour
         if (!File.Exists(Application.persistentDataPath + "/PlayerInfo.abyss"))
         {
             playerInfo = new PlayerInfo();
-            SaveInfo();
-            ToUpgradeScreen(startScreen);
+            SaveInfo();          
         }
 
-        //else if (File.Exists(Application.persistentDataPath + "/PlayerInfo.abyss"))
-        //{
-        //    LoadInfo();
-        //}
+        else if (File.Exists(Application.persistentDataPath + "/PlayerInfo.abyss"))
+        {
+            LoadInfo();
+        }
 
-    }
 
-    public PlayerInfo GetPlayerInfo()
-    {
-        return playerInfo;
     }
 
     public void ToGame()
     {
-        StartCoroutine( LoadYourAsyncScene() );
+        if (playerInfo.newPlayer == true)
+        {
+            ToUpgradeScreen(startScreen);
+        }
+
+        else
+        {
+            StartCoroutine(LoadYourAsyncScene());
+        }
     }
 
     IEnumerator LoadYourAsyncScene()
@@ -80,6 +83,10 @@ public class MenuController : MonoBehaviour
     public void ToStartScreen(GameObject currentScreen)
     {
         startScreen.SetActive(true);
+        if (currentScreen == upgradeScreen)
+        {
+            LoadInfo();
+        }
         currentScreen.SetActive(false);
     }
 
@@ -104,6 +111,10 @@ public class MenuController : MonoBehaviour
     private void LoadInfo()
     {
         // This function loads  up the Player Info file
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Open(Application.persistentDataPath + "/PlayerInfo.abyss", FileMode.Open);
+        playerInfo = (PlayerInfo)bf.Deserialize(file);
+        file.Close();
     }
 
     private void SaveInfo()

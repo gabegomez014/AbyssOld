@@ -12,6 +12,10 @@ public class PlayerInfo
     public int defense = 5;
     public int speed = 5;
     public int atkSpd = 5;
+    public int currentExp;      // Default value is 0
+    public int levelUpExp = 1000;
+    public float health = 100;
+    public float arete = 100;
 
     public PlayerInfo Clone()
     {
