@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using System.Collections.ObjectModel;
 
-public class CharacterStat : MonoBehaviour
+public class CharacterStat
 {
     public float baseValue;
     private float lastBaseValue = float.MinValue;
@@ -26,6 +26,7 @@ public class CharacterStat : MonoBehaviour
 
         get
         {
+            _value = baseValue;
             if (isModded)
             {
                 lastBaseValue = baseValue;

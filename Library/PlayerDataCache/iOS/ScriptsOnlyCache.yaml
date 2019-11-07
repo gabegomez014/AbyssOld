@@ -1,8 +1,8 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
-    - AbilityCaster
     - AbilityCooldown
+    - DefenseAbility
     - Done_BGScroller
     - Done_DestroyByBoundary
     - Done_DestroyByContact
@@ -10,8 +10,13 @@ ScriptsOnlyBuild:
     - Done_GameController
     - Done_Mover
     - Done_RandomRotator
+    - EnhancerAbility
+    - PlayerAnimator
+    - PlayerController
     - PlayerMover
+    - PlayerStats
     - ProjectileAbility
+    - RaycastAbility
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
@@ -22,13 +27,24 @@ ScriptsOnlyBuild:
     - UnityEngine.Rendering.LWRP.ForwardRendererData
     - UnityEngine.Rendering.LWRP.LightweightRenderPipelineAsset
     - UnityEngine.Rendering.LWRP.LightweightRenderPipelineEditorResources
-    Unity.ShaderGraph.Editor.dll:
-    - UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
+    Unity.TextMeshPro.dll:
+    - TMPro.TMP_FontAsset
+    - TMPro.TMP_Settings
+    - TMPro.TMP_SpriteAsset
+    - TMPro.TMP_StyleSheet
+    - TMPro.TextMeshProUGUI
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.PhysicsRaycaster
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
@@ -36,7 +52,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Image
     - UnityEngine.UI.Text
   sceneClasses:
-    Assets/_Complete-Game/Scenes/Done_Main.unity:
+    Assets/Scenes/Main.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -55,11 +71,15 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 49
+      Script: {instanceID: 0}
     - Class: 54
       Script: {instanceID: 0}
     - Class: 64
       Script: {instanceID: 0}
     - Class: 65
+      Script: {instanceID: 0}
+    - Class: 74
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
@@ -67,48 +87,76 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 83
       Script: {instanceID: 0}
-    - Class: 92
+    - Class: 90
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 108
       Script: {instanceID: 0}
+    - Class: 109
+      Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9854}
+      Script: {instanceID: 9890}
     - Class: 114
-      Script: {instanceID: 10122}
+      Script: {instanceID: 10124}
     - Class: 114
-      Script: {instanceID: 10168}
+      Script: {instanceID: 10160}
     - Class: 114
-      Script: {instanceID: 10246}
+      Script: {instanceID: 10206}
     - Class: 114
-      Script: {instanceID: 10510}
+      Script: {instanceID: 10284}
     - Class: 114
-      Script: {instanceID: 10982}
+      Script: {instanceID: 10394}
     - Class: 114
-      Script: {instanceID: 11196}
+      Script: {instanceID: 10492}
     - Class: 114
-      Script: {instanceID: 11290}
+      Script: {instanceID: 10498}
     - Class: 114
-      Script: {instanceID: 11730}
+      Script: {instanceID: 10552}
     - Class: 114
-      Script: {instanceID: 11888}
+      Script: {instanceID: 11024}
     - Class: 114
-      Script: {instanceID: 12226}
+      Script: {instanceID: 11070}
     - Class: 114
-      Script: {instanceID: 12286}
+      Script: {instanceID: 11332}
     - Class: 114
-      Script: {instanceID: 12542}
+      Script: {instanceID: 11772}
     - Class: 114
-      Script: {instanceID: 12766}
+      Script: {instanceID: 11930}
     - Class: 114
-      Script: {instanceID: 12944}
+      Script: {instanceID: 12124}
     - Class: 114
-      Script: {instanceID: 13070}
+      Script: {instanceID: 12144}
     - Class: 114
-      Script: {instanceID: 13222}
+      Script: {instanceID: 12270}
     - Class: 114
-      Script: {instanceID: 13344}
+      Script: {instanceID: 12330}
+    - Class: 114
+      Script: {instanceID: 12474}
+    - Class: 114
+      Script: {instanceID: 12590}
+    - Class: 114
+      Script: {instanceID: 12814}
+    - Class: 114
+      Script: {instanceID: 12898}
+    - Class: 114
+      Script: {instanceID: 12932}
+    - Class: 114
+      Script: {instanceID: 12992}
+    - Class: 114
+      Script: {instanceID: 13098}
+    - Class: 114
+      Script: {instanceID: 13118}
+    - Class: 114
+      Script: {instanceID: 13168}
+    - Class: 114
+      Script: {instanceID: 13272}
+    - Class: 114
+      Script: {instanceID: 13394}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -118,6 +166,8 @@ ScriptsOnlyBuild:
     - Class: 135
       Script: {instanceID: 0}
     - Class: 136
+      Script: {instanceID: 0}
+    - Class: 137
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -200,6 +250,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Postprocessing.Runtime.dll
     namespaceName: UnityEngine.Rendering.PostProcessing
     className: MotionBlur
+  - hash:
+      serializedVersion: 2
+      Hash: 7cf903041459e23cc8a0cf8caed4ff37
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerStats
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -286,6 +342,12 @@ ScriptsOnlyBuild:
     className: GridLayoutGroup
   - hash:
       serializedVersion: 2
+      Hash: 9405973aa9c12d222083ecdc4bc02740
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnhancerAbility
+  - hash:
+      serializedVersion: 2
       Hash: 63d7b9b64a11859f416d72ba9a3c3fec
     assemblyName: Unity.Postprocessing.Runtime.dll
     namespaceName: UnityEngine.Rendering.PostProcessing
@@ -314,6 +376,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Postprocessing.Runtime.dll
     namespaceName: UnityEngine.Rendering.PostProcessing
     className: PostProcessProfile
+  - hash:
+      serializedVersion: 2
+      Hash: 3bdea4d2f8df3b46d2d97b2cc9b51a9e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DefenseAbility
   - hash:
       serializedVersion: 2
       Hash: 0dbc3be398b4869a5c8d0d8481ee402c
@@ -454,7 +522,7 @@ ScriptsOnlyBuild:
     className: Done_EvasiveManeuver
   - hash:
       serializedVersion: 2
-      Hash: e4059b9711b39927c15a83b9f32b554e
+      Hash: 97948af14007ca826522f740179d0183
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AbilityCaster
@@ -496,6 +564,12 @@ ScriptsOnlyBuild:
     className: AnalyticsEventTrackerEditor
   - hash:
       serializedVersion: 2
+      Hash: e58f9ac43623ed4c7cbce463018be055
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CharacterStat
+  - hash:
+      serializedVersion: 2
       Hash: d6fc8d3165070298511ec776ea575626
     assemblyName: Unity.Postprocessing.Runtime.dll
     namespaceName: UnityEngine.Rendering.PostProcessing
@@ -506,12 +580,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SpriteAnimator
-  - hash:
-      serializedVersion: 2
-      Hash: c4a9eba5a75f4f99dbe87c377bf996cb
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ProjectileShootTriggerable
   - hash:
       serializedVersion: 2
       Hash: a53651ee3996fbba20dfe0fce02f0b23
@@ -616,6 +684,12 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
+      Hash: 29c4525ff283e9df00148ec33e8868cd
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemyStats
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: UnityEngine.Advertisements.dll
     namespaceName: UnityEngine.Advertisements
@@ -640,7 +714,7 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
-      Hash: eea30d6210bb594159c287f9b9fae312
+      Hash: 6a7b4ba5021569ff0ae8c90e30713a64
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ProjectileAbility
@@ -706,7 +780,7 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 7007cd20fdbb6dc67a9dfe1b471df1c3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerMover
@@ -727,7 +801,7 @@ ScriptsOnlyBuild:
       Hash: d87a00c7a10bfacb889f2e1d042dc43a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: Done_PlayerController
+    className: PlayerController
   - hash:
       serializedVersion: 2
       Hash: 813a98d7c38886af7cdb0e991a546577
@@ -754,7 +828,7 @@ ScriptsOnlyBuild:
     className: TextMeshPro
   - hash:
       serializedVersion: 2
-      Hash: d14c885bc18a18ec9311b018dc9af04b
+      Hash: b6c0f139e67e5bf4c6ac27e32558f0d1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: RaycastAbility
@@ -788,6 +862,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
     className: BaseInput
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerAnimator
   - hash:
       serializedVersion: 2
       Hash: caa533b001ae39b864ba8425019e2268
@@ -856,7 +936,7 @@ ScriptsOnlyBuild:
     className: ToggleGroup
   - hash:
       serializedVersion: 2
-      Hash: 96579b1d7c32aebb6c65db101ee7a10b
+      Hash: be2076373d5e7a8f5e4fec41a3cb931a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Done_GameController
@@ -868,5 +948,5 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   platform: 9
   scenePathNames:
-  - Assets/_Complete-Game/Scenes/Done_Main.unity
+  - Assets/Scenes/Main.unity
   playerPath: /Users/gabrielgomez/Documents/AbyssProto

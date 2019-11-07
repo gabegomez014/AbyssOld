@@ -23,12 +23,12 @@ public class PlayerMover : MonoBehaviour
 
     Rigidbody rb;
     SkinnedMeshRenderer playerTexture;
-
-    [HideInInspector] public float speed = 5f;         // This is how fast a character moves. This will be replaced by character stat once the stats system gets implemented
+    float moveStat;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        moveStat = GetComponent<PlayerStats>().GetSpeed();
         teleportPS = teleportActivatedGO.GetComponent<ParticleSystem>();
     }
 
@@ -94,19 +94,19 @@ public class PlayerMover : MonoBehaviour
             {
                 var direction = transform.position.x - touchPosition.x;         // If positive, move to the lef. If negative, move to the right
 
-                if (direction < 0.5 && direction > -0.5)
+                if (direction < 0.3 && direction > -0.3)
                 {
                     rb.velocity = new Vector3(0, 0, 0);             // Checking for the in-between in order to force stop movement
                 }
 
                 if (direction > 1)
                 {
-                    rb.velocity = new Vector3(-speed,0,0);          // Move Left
+                    rb.velocity = new Vector3(-moveStat,0,0);          // Move Left
                 }
 
                 else if (direction < -1)
                 {
-                    rb.velocity = new Vector3(speed, 0, 0);         // Move Right
+                    rb.velocity = new Vector3(moveStat, 0, 0);         // Move Right
                 }
                 
             }
