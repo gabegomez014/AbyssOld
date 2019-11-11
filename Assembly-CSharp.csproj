@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\Menu\StartController.cs" />
     <Compile Include="Assets\Scripts\Menu\UpgradeController.cs" />
     <Compile Include="Assets\Scripts\PlayerAnimator.cs" />
+    <Compile Include="Assets\Scripts\PlayerAttack.cs" />
     <Compile Include="Assets\Scripts\PlayerMover.cs" />
     <Compile Include="Assets\Scripts\ProjectileAbility.cs" />
     <Compile Include="Assets\Scripts\RaycastAbility.cs" />

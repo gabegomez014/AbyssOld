@@ -32,6 +32,11 @@ public class PlayerStats : MonoBehaviour
         return speed.Value;
     }
 
+    public float GetPower()
+    {
+        return attackPower.Value;
+    }
+
     private void Die()
     {
         print("Player Died");
