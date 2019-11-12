@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
-
+    [SerializeField]
+    private Image healthBarImg;
+    [SerializeField]
+    private Image areteBarImg;
     [HideInInspector] public CharacterStat attackPower;
     [HideInInspector] public CharacterStat attackSpeed;
     [HideInInspector] public CharacterStat speed;
@@ -24,7 +28,16 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamange(int damage)
     {
-        
+        currentHealth.baseValue -= damage;
+        float currentPct = currentHealth.Value / playerInfo.health;
+        healthBarImg.fillAmount = currentPct;   // For a smoother animation, Lerp this value in a co-routine. Not necessary right now.
+    }
+
+    public void UseArete(int usage)
+    {
+        currentArete.baseValue -= usage;
+        float currentPct = currentArete.Value / playerInfo.arete;
+        areteBarImg.fillAmount = currentPct;   // For a smoother animation, Lerp this value in a co-routine. Not necessary right now.
     }
 
     public float GetSpeed()
