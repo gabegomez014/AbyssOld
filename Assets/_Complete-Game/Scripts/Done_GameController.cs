@@ -12,6 +12,9 @@ public class Done_GameController : MonoBehaviour
     public float startWait;
     public float waveWait;
 
+    [SerializeField]
+    private GameObject pauseScreen;
+
     //public Text scoreText;
     //public Text restartText;
     //public Text gameOverText;
@@ -19,6 +22,8 @@ public class Done_GameController : MonoBehaviour
     //private bool gameOver;
     //private bool restart;
     //private int score;
+
+    private float currentTimeScale;
 
     void Start()
     {
@@ -82,5 +87,18 @@ public class Done_GameController : MonoBehaviour
     {
         //gameOverText.text = "Game Over!";
         //gameOver = true;
+    }
+
+    public void DisplayPauseScreen()
+    {
+        currentTimeScale = Time.timeScale;
+        Time.timeScale = 0;
+        pauseScreen.SetActive(true);
+    }
+
+    public void HidePauseScreen()
+    {
+        Time.timeScale = currentTimeScale;
+        pauseScreen.SetActive(false);
     }
 }
